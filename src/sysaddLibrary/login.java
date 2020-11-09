@@ -96,7 +96,7 @@ public class login {
 				try {
 					//logs information to login/out database
 			        Class.forName("com.mysql.cj.jdbc.Driver");
-			        System.out.println("Loaded driver");
+			        //System.out.println("Loaded driver");
 			        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/library");
 			        Statement s=con.createStatement();
 					s.execute("INSERT INTO LOGIN(studentID, FNAME, LNAME, EMAIL, USTYPE) VALUES('" + studentId + "','" + fName + "','" + lName+ "','"+ email +"', '"+usType+"')");
@@ -116,7 +116,7 @@ public class login {
 				        tick.setRepeats(false);
 				        tick.start();
 				        
-			        System.out.println("Connected to MySQL");
+			        //System.out.println("Connected to MySQL");
 			        return;	
 			    
 			 } 

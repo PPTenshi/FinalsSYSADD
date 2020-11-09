@@ -27,9 +27,6 @@ public class main {
     public static void main(String[] args) {
          
         admin_menu();
-    	//database();
-        //create();
-    	//login();
     }
 
 	public static void login() {
@@ -121,9 +118,9 @@ public class main {
 	{
 	try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
-	        System.out.println("Loaded driver");
+	        //System.out.println("Loaded driver");
 	        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/library");
-	        System.out.println("Connected to MySQL");
+	        //System.out.println("Connected to MySQL");
 	        return con;
 	 } 
 	 catch (Exception ex) {

@@ -39,11 +39,10 @@ public class generate {
 	}
 	   public static void generateBookReport() {
 		   try {
-	   			System.out.println("hello world");
 	   	        Class.forName("com.mysql.cj.jdbc.Driver");
-	   	        System.out.println("Loaded driver");
+	   	        //System.out.println("Loaded driver");
 	   	        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/library");
-	   	        System.out.println("Connected to MySQL");
+	   	        //System.out.println("Connected to MySQL");
 	   	        Statement stmt = con.createStatement();
 	               /* Define the SQL query */
 	               ResultSet query_set = stmt.executeQuery("SELECT BACCNUM,BTITLE,ISSUED_DATE,RETURN_DATE,STATUS,UID FROM BOOKS");
@@ -124,11 +123,10 @@ public class generate {
 	    }
        public static void generateAttendance() {
     	   try {
-   			System.out.println("hello world");
    	        Class.forName("com.mysql.cj.jdbc.Driver");
-   	        System.out.println("Loaded driver");
+   	        //System.out.println("Loaded driver");
    	        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/library");
-   	        System.out.println("Connected to MySQL");
+   	        //System.out.println("Connected to MySQL");
    	        Statement stmt = con.createStatement();
                /* Define the SQL query */
                ResultSet query_set = stmt.executeQuery("SELECT studentID,FNAME,LNAME,EMAIL,USTYPE,DATE FROM LOGIN");
