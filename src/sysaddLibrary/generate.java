@@ -1,10 +1,17 @@
 package sysaddLibrary;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -199,4 +206,64 @@ public class generate {
    	 }
    	return;
     }
+       
+       
+       public static void generateWindow() {
+    	JFrame frmGenerateReport = new JFrame();
+   		frmGenerateReport.setTitle("Generate Report");
+   		frmGenerateReport.setBounds(100, 100, 351, 224);
+   		frmGenerateReport.getContentPane().setLayout(null);
+   		frmGenerateReport.setVisible(true);
+   		JLabel successLbl = new JLabel("");
+   		successLbl.setHorizontalAlignment(SwingConstants.CENTER);
+   		successLbl.setBounds(127, 113, 74, 35);
+   		frmGenerateReport.getContentPane().add(successLbl);
+   		
+   		JButton attBtn = new JButton("Attendance Log");
+   		attBtn.addActionListener(new ActionListener() {
+   			public void actionPerformed(ActionEvent arg0) {
+   				generate.generateAttendance();
+   				successLbl.setText("Success!");
+   				
+   				int delay = 2500; //milliseconds, Clears the labels for the next user
+   			      ActionListener taskPerformer = new ActionListener() {
+   			          public void actionPerformed(ActionEvent evt) {
+   			        	  successLbl.setText("");
+   			        	  
+   			            }
+   			        };
+   			        javax.swing.Timer tick=new javax.swing.Timer(delay,taskPerformer);
+   			        tick.setRepeats(false);
+   			        tick.start();
+   			}
+   		});
+   		attBtn.setBounds(21, 24, 139, 70);
+   		frmGenerateReport.getContentPane().add(attBtn);
+   		
+   		JButton bookBtn = new JButton("Book Log");
+   		bookBtn.addActionListener(new ActionListener() {
+   			public void actionPerformed(ActionEvent e) {
+   				generate.generateBookReport();
+   				successLbl.setText("Success!");
+   				
+   				int delay = 2500; //milliseconds, Clears the labels for the next user
+   			      ActionListener taskPerformer = new ActionListener() {
+   			          public void actionPerformed(ActionEvent evt) {
+   			        	  successLbl.setText("");
+   			        	  
+   			            }
+   			        };
+   			        javax.swing.Timer tick=new javax.swing.Timer(delay,taskPerformer);
+   			        tick.setRepeats(false);
+   			        tick.start();
+   			}
+   		});
+   		
+   		
+   		bookBtn.setBounds(170, 24, 139, 70);
+   		frmGenerateReport.getContentPane().add(bookBtn);
+   		
+   		
+   	}
+       
 }

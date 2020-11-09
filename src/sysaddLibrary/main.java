@@ -16,6 +16,7 @@ import net.proteanit.sql.DbUtils;
 import sysaddLibrary.main.ex;
 
 import java.awt.Color;
+import java.awt.SystemColor;
  
 public class main {
      
@@ -174,130 +175,39 @@ public class main {
 	     }
 	}
 	
-//	public static void user_menu(String UID) {
-//	     
-//	     
-//	    JFrame f=new JFrame("User Functions"); //Give dialog box name as User functions
-//	    JButton view_but=new JButton("View Books");//creating instance of JButton  
-//	    view_but.setBounds(20,20,120,25);//x axis, y axis, width, height 
-//	    view_but.addActionListener(new ActionListener() { 
-//	        public void actionPerformed(ActionEvent e){
-//	             
-//	            JFrame f = new JFrame("Books Available"); //View books stored in database
-//
-//	            Connection connection = connect();
-//	            String sql="select * from BOOKS"; //Retreive data from database
-//	            try {
-//	                Statement stmt = connection.createStatement(); //connect to database
-//	                 stmt.executeUpdate("USE LIBRARY"); // use librabry
-//	                stmt=connection.createStatement();
-//	                ResultSet rs=stmt.executeQuery(sql);
-//	                JTable book_list= new JTable(); //show data in table format
-//	                book_list.setModel(DbUtils.resultSetToTableModel(rs)); 
-//	                  
-//	                JScrollPane scrollPane = new JScrollPane(book_list); //enable scroll bar
-//	 
-//	                f.getContentPane().add(scrollPane); //add scroll bar
-//	                f.setSize(800, 400); //set dimensions of view books frame
-//	                f.setVisible(true);
-//	                f.setLocationRelativeTo(null);
-//	            } catch (SQLException e1) {
-//	                // TODO Auto-generated catch block
-//	                 JOptionPane.showMessageDialog(null, e1);
-//	            }               
-//	             
-//	    }
-//	    }
-//	    );
-//	     
-//	    JButton my_book=new JButton("My Books");//creating instance of JButton  
-//	    my_book.setBounds(150,20,120,25);//x axis, y axis, width, height 
-//	    my_book.addActionListener(new ActionListener() { //Perform action
-//	        public void actionPerformed(ActionEvent e){
-//	             
-//	               
-//	            JFrame f = new JFrame("My Books"); //View books issued by user
-//	            //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	            int UID_int = Integer.parseInt(UID); //Pass user ID
-//	 
-//	            //.iid,issued.uid,issued.bid,issued.issued_date,issued.return_date,issued,
-//	            Connection connection = connect(); //connect to database
-//	            //retrieve data
-//	            String sql="select distinct issued.*,books.btitle,books.genre,books.period from issued,books " + "where ((issued.uid=" + UID_int + ") and (books.bid in (select bid from issued where issued.uid="+UID_int+"))) group by issueid";
-//	            String sql1 = "select bid from issued where uid="+UID_int;
-//	            try {
-//	                Statement stmt = connection.createStatement();
-//	                //use database
-//	                 stmt.executeUpdate("USE LIBRARY");
-//	                stmt=connection.createStatement();
-//	                //store in array
-//	                ArrayList books_list = new ArrayList();
-//	  
-//	                
-//	                 
-//	                ResultSet rs=stmt.executeQuery(sql);
-//	                JTable book_list= new JTable(); //store data in table format
-//	                book_list.setModel(DbUtils.resultSetToTableModel(rs)); 
-//	                //enable scroll bar
-//	                JScrollPane scrollPane = new JScrollPane(book_list);
-//	 
-//	                f.getContentPane().add(scrollPane); //add scroll bar
-//	                f.setSize(800, 400); //set dimensions of my books frame
-//	                f.setVisible(true);
-//	                f.setLocationRelativeTo(null);
-//	            } catch (SQLException e1) {
-//	                // TODO Auto-generated catch block
-//	                 JOptionPane.showMessageDialog(null, e1);
-//	            }               
-//	                 
-//	    }
-//	    }
-//	    );
-//	     
-//	     
-//	     
-//	    f.getContentPane().add(my_book); //add my books
-//	    f.getContentPane().add(view_but); // add view books
-//	    f.setSize(300,100);//400 width and 500 height  
-//	    f.getContentPane().setLayout(null);//using no layout managers  
-//	    f.setVisible(true);//making the frame visible 
-//	    f.setLocationRelativeTo(null);
-//	    }
-	
 	public static void admin_menu() {
 	     
-	     
 	    JFrame f=new JFrame("APC RFID LIBRARY SYSTEM");
+	    f.getContentPane().setBackground(new Color(100, 149, 237));
+	    f.getContentPane().setForeground(Color.WHITE);
 	    f.setTitle("APC RFID LIBRARY SYSTEM - Librarian");
-	    //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //
 	     
-	     
-	    JButton database_but=new JButton("Database Reset");//creating instance of JButton to create or reset database
+	    JButton database_but=new JButton("Database Reset");
 	    database_but.setBackground(Color.PINK);
-	    database_but.setBounds(10,11,246,49);//x axis, y axis, width, height 
-	    database_but.addActionListener(new ActionListener() { //Perform action
+	    database_but.setBounds(10,11,141,49);
+	    database_but.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e){
 	             
-	            database(); //Call create function
-	            JOptionPane.showMessageDialog(null,"Database Reset!"); //Open a dialog box and display the message
+	            database();
+	            JOptionPane.showMessageDialog(null,"Database Reset!");
 	             
 	        }
 	    });
 
 	   
-	    Connection connection = main.connect(); //connect to database
+	    Connection connection = main.connect(); //connect database
 	    String sql="SELECT BACCNUM as 'Accession No.', BTITLE as 'Title', BAUTH as 'Author', GENRE as 'Genre', PUBLISHER as 'Publisher', PUBYEAR as 'Year Published', ISSUED_DATE as 'Issued Date', RETURN_DATE as 'Return Date', PERIOD as 'Period', STATUS as 'Status' FROM BOOKS"; //select all books 
-        //String sql="select * from BOOKS"; //select all books 
+
         try {
             Statement stmt = connection.createStatement();
-             stmt.executeUpdate("USE LIBRARY"); //use database
+             stmt.executeUpdate("USE LIBRARY"); 
             stmt=connection.createStatement();
             ResultSet rs=stmt.executeQuery(sql);
-            JTable book_list= new JTable(); //view data in table format
+            JTable book_list= new JTable(); 
             book_list.setModel(DbUtils.resultSetToTableModel(rs)); 
             //mention scroll bar
             JScrollPane scrollPane = new JScrollPane(book_list);
-            scrollPane.setBounds(279, 11, 577, 228);
+            scrollPane.setBounds(10, 66, 577, 228);
             f.getContentPane().add(scrollPane);
             f.getContentPane().setLayout(null);
             
@@ -310,176 +220,19 @@ public class main {
         
         JButton btnNewButton = new JButton("Generate Report");
         btnNewButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		generate.generateAttendance();
-        		generate.generateBookReport();
+        	public void actionPerformed(ActionEvent e){
+                generate.generateWindow();
         	}
         });
-        btnNewButton.setBounds(10, 90, 246, 23);
+        btnNewButton.setBounds(332, 11, 136, 49);
         f.getContentPane().add(btnNewButton);
-        f.setSize(882, 303); //set size for frame
+        f.setSize(622, 432); //set size for frame
         f.setVisible(true);
         f.setLocationRelativeTo(null);
         
-//	    JButton users_but=new JButton("Users");//creating instance of JButton to view users
-//	    users_but.setBounds(10,161,120,25);//x axis, y axis, width, height 
-//	    users_but.addActionListener(new ActionListener() { //Perform action on click button
-//	        public void actionPerformed(ActionEvent e){
-//	                 
-//	                JFrame f = new JFrame("Users List");
-//	                //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	                 
-//	                 
-//	                Connection connection = connect();
-//	                String sql="select * from users"; //retrieve all users
-//	                try {
-//	                    Statement stmt = connection.createStatement();
-//	                     stmt.executeUpdate("USE LIBRARY"); //use database
-//	                    stmt=connection.createStatement();
-//	                    ResultSet rs=stmt.executeQuery(sql);
-//	                    JTable book_list= new JTable();
-//	                    book_list.setModel(DbUtils.resultSetToTableModel(rs)); 
-//	                    //mention scroll bar
-//	                    JScrollPane scrollPane = new JScrollPane(book_list);
-//	 
-//	                    f.getContentPane().add(scrollPane); //add scrollpane
-//	                    f.setSize(800, 400); //set size for frame
-//	                    f.setVisible(true);
-//	                    f.setLocationRelativeTo(null);
-//	                } catch (SQLException e1) {
-//	                    // TODO Auto-generated catch block
-//	                     JOptionPane.showMessageDialog(null, e1);
-//	                }       
-//	                 
-//	                 
-//	    }
-//	        }
-//	    );  
-	     
-	    JButton issued_but=new JButton("Loaned Books");
-	    issued_but.setBounds(136,160,120,25);//x axis, y axis, width, height 
-	    issued_but.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e){
-	                 
-	                JFrame f = new JFrame("Loaned Books");
-	                //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	                 
-	                 
-	                Connection connection = connect();
-	                String sql="select * from issued";
-	                try {
-	                    Statement stmt = connection.createStatement();
-	                     stmt.executeUpdate("USE LIBRARY");
-	                    stmt=connection.createStatement();
-	                    ResultSet rs=stmt.executeQuery(sql);
-	                    JTable book_list= new JTable();
-	                    book_list.setModel(DbUtils.resultSetToTableModel(rs)); 
-	                     
-	                    JScrollPane scrollPane = new JScrollPane(book_list);
-	 
-	                    f.getContentPane().add(scrollPane);
-	                    f.setSize(800, 400);
-	                    f.setVisible(true);
-	                    f.setLocationRelativeTo(null);
-	                } catch (SQLException e1) {
-	                    // TODO Auto-generated catch block
-	                     JOptionPane.showMessageDialog(null, e1);
-	                }       
-	                             
-	    }
-	        }
-	    );
-	     
-	     
-//	    JButton add_user=new JButton("Add User"); //creating instance of JButton to add users
-//	    add_user.setBounds(10,124,120,25); //set dimensions for button
-//	     
-//	    add_user.addActionListener(new ActionListener() {
-//	        public void actionPerformed(ActionEvent e){
-//	                 
-//	                JFrame g = new JFrame("Enter User Details"); //Frame to enter user details
-//	                //g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	                //Create label 
-//	                JLabel l1,l2;  
-//	                l1=new JLabel("Username");  //label 1 for username
-//	                l1.setBounds(30,15, 100,30); 
-//	                 
-//	                 
-//	                l2=new JLabel("Password");  //label 2 for password
-//	                l2.setBounds(30,50, 100,30); 
-//	                 
-//	                //set text field for username 
-//	                JTextField F_user = new JTextField();
-//	                F_user.setBounds(110, 15, 200, 30);
-//	                 
-//	                //set text field for password
-//	                JPasswordField F_pass=new JPasswordField();
-//	                F_pass.setBounds(110, 50, 200, 30);
-//	                //set radio button for admin
-//	                JRadioButton a1 = new JRadioButton("Admin");
-//	                a1.setBounds(55, 80, 200,30);
-//	                //set radio button for user
-//	                JRadioButton a2 = new JRadioButton("User");
-//	                a2.setBounds(130, 80, 200,30);
-//	                //add radio buttons
-//	                ButtonGroup bg=new ButtonGroup();    
-//	                bg.add(a1);bg.add(a2);  
-//	                 
-//	                                 
-//	                JButton create_but=new JButton("Create");//creating instance of JButton for Create 
-//	                create_but.setBounds(130,130,80,25);//x axis, y axis, width, height 
-//	                create_but.addActionListener(new ActionListener() {
-//	                     
-//	                    public void actionPerformed(ActionEvent e){
-//	                     
-//	                    String username = F_user.getText();
-//	                    String password = F_pass.getText();
-//	                    Boolean admin = false;
-//	                     
-//	                    if(a1.isSelected()) {
-//	                        admin=true;
-//	                    }
-//	                     
-//	                    Connection connection = connect();
-//	                     
-//	                    try {
-//	                    Statement stmt = connection.createStatement();
-//	                     stmt.executeUpdate("USE LIBRARY");
-//	                     stmt.executeUpdate("INSERT INTO USERS(EMAIL,PASSWORD,ADMIN) VALUES ('"+username+"','"+password+"',"+admin+")");
-//	                     JOptionPane.showMessageDialog(null,"User added!");
-//	                     g.dispose();
-//	                      
-//	                    }
-//	                     
-//	                    catch (SQLException e1) {
-//	                        // TODO Auto-generated catch block
-//	                         JOptionPane.showMessageDialog(null, e1);
-//	                    }   
-//	                     
-//	                    }
-//	                     
-//	                });
-//	                     
-//	                 
-//	                    g.getContentPane().add(create_but);
-//	                    g.getContentPane().add(a2);
-//	                    g.getContentPane().add(a1);
-//	                    g.getContentPane().add(l1);
-//	                    g.getContentPane().add(l2);
-//	                    g.getContentPane().add(F_user);
-//	                    g.getContentPane().add(F_pass);
-//	                    g.setSize(350,200);//400 width and 500 height  
-//	                    g.getContentPane().setLayout(null);//using no layout managers  
-//	                    g.setVisible(true);//making the frame visible 
-//	                    g.setLocationRelativeTo(null);
-//	                 
-//	                 
-//	    }
-//	    });
-	         
 	     
 	    JButton add_book=new JButton("Add Book"); //creating instance of JButton for adding books
-	    add_book.setBounds(136,124,120,25); 
+	    add_book.setBounds(478,11,109,49); 
 	     
 	    add_book.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e){
@@ -503,10 +256,14 @@ public class main {
 	            lblPublisher.setBounds(30, 131, 100, 30);
 	            g.getContentPane().add(lblPublisher);
 
+	            JLabel lblYearPublished = new JLabel("Year Published");
+	            lblYearPublished.setBounds(30, 172, 60, 30);
+	            g.getContentPane().add(lblYearPublished);
+	            
 	            //set text field for book name
 	            JTextField F_btitle = new JTextField();
 	            F_btitle.setBounds(110, 15, 200, 30);
-	             
+	            
 	            //set text field for genre 
 	            JTextField F_bauth=new JTextField();
 	            F_bauth.setBounds(110, 53, 200, 30);
@@ -516,6 +273,9 @@ public class main {
 	                     
 	            JTextField publ = new JTextField();
 	            publ.setBounds(110, 131, 200, 30);
+	            
+	            JTextField yearPub = new JTextField();
+	            yearPub.setBounds(110, 172, 200, 30);
 	            
 	            
 	            JButton create_but=new JButton("Add Book");//creating instance of JButton to submit details  
@@ -528,14 +288,15 @@ public class main {
 	                String auth = F_bauth.getText();
 	                String genre = F_genre.getText();
 	                String pub = publ.getText();
+	                String yrPub = yearPub.getText();
 	                Connection connection = main.connect();
 	                 
 	                try {
 	                Statement stmt = connection.createStatement();
 	                 stmt.executeUpdate("USE LIBRARY");
-	                 stmt.executeUpdate("INSERT INTO BOOKS(BTITLE, BAUTH, GENRE, PUBLISHER, STATUS) VALUES ('"+bname+"','"+auth+"','"+genre+"','"+pub+"','Available')");
+	                 stmt.executeUpdate("INSERT INTO BOOKS(BTITLE, BAUTH, GENRE, PUBLISHER, PUBYEAR, STATUS) VALUES ('"+bname+"','"+auth+"','"+genre+"','"+pub+"', '"+yrPub+"','Available')");
 	                 JOptionPane.showMessageDialog(null,"Book added!");
-	                 f.dispose();
+	                 //f.dispose();
 	                 main.admin_menu();
 	                 g.dispose();
 	                 
@@ -561,6 +322,7 @@ public class main {
 	                g.setSize(350,292);//400 width and 500 height  
 	                g.getContentPane().setLayout(null);//using no layout managers  
 	                g.getContentPane().add(publ);
+	                g.getContentPane().add(yearPub);
 	                g.setVisible(true);//making the frame visible 
 	                g.setLocationRelativeTo(null);
 	                
@@ -575,7 +337,7 @@ public class main {
 	     
 	    JButton issue_book=new JButton("Borrow"); //creating instance of JButton to issue books
 	    issue_book.setBackground(Color.GREEN);
-	    issue_book.setBounds(136,199,120,40); 
+	    issue_book.setBounds(280,305,307,66); 
 	     
 	    issue_book.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e){
@@ -671,7 +433,7 @@ public class main {
 	     
 	    JButton return_book=new JButton("Return"); //creating instance of JButton to return books
 	    return_book.setBackground(Color.GREEN);
-	    return_book.setBounds(10,199,120,40); 
+	    return_book.setBounds(10,305,254,66); 
 	     
 	    return_book.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e){
@@ -743,29 +505,6 @@ public class main {
 	                 f.dispose();
 	                 admin_menu();
 	                 g.dispose();
-	                  
-
-//	                 Connection connection1 = connect();
-//	                 Statement stmt1 = connection1.createStatement();
-//	                 stmt1.executeUpdate("USE LIBRARY");                
-//	                ResultSet rs1 = stmt1.executeQuery("SELECT PERIOD FROM ISSUED WHERE IID="+iid); //set period
-//	                String diff=null; 
-//	                while (rs1.next()) {
-//	                     diff = rs1.getString(1);
-//	                      
-//	                   }
-//	                int diff_int = Integer.parseInt(diff);
-//	                //if(ex.days&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;diff_int) { //If number of days are more than the period then calculcate fine
-//	                     
-//	                    //System.out.println(ex.days);
-//	                    int fine = (ex.days-diff_int)*10; //fine for every day after the period is Rs 10.
-//	                    //update fine in the system
-//	                    stmt1.executeUpdate("UPDATE ISSUED SET FINE="+fine+" WHERE IID="+iid);  
-//	                    String fine_str = ("Fine: Rs. "+fine);
-//	                    JOptionPane.showMessageDialog(null,fine_str);
-//	                     
-//	               // }
-
 	                 JOptionPane.showMessageDialog(null,"Book Returned!");
 	                  
 	                }
@@ -795,14 +534,9 @@ public class main {
 	    f.getContentPane().add(database_but);
 	    f.getContentPane().add(return_book);
 	    f.getContentPane().add(issue_book);
-	    f.getContentPane().add(add_book);
-	    f.getContentPane().add(issued_but);
-	    //f.getContentPane().add(users_but);
-	    //f.getContentPane().add(view_but);
-	    //f.getContentPane().add(add_user);
-	    //f.setSize(600,594);//400 width and 500 height  
-	    f.getContentPane().setLayout(null);//using no layout managers  
-	    f.setVisible(true);//making the frame visible 
+	    f.getContentPane().add(add_book); 
+	    f.getContentPane().setLayout(null);
+	    f.setVisible(true);
 	    f.setLocationRelativeTo(null);
 	     
 	    }
